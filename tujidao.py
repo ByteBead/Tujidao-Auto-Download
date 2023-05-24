@@ -5,7 +5,7 @@ import time
 
 
 def downloadSigle(file_path, pic_url, refererUrl="https://tujidao06.com/"):
-    # 一个非常基本的下载图片所需的函数 基于规则下载页面的全部图片 直至返回404 提示全部下载完毕
+    # 一个非常基本地下载图片所需的函数 基于规则下载页面的全部图片 直至返回404 提示全部下载完毕
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 ",
         "Referer": refererUrl}
@@ -38,7 +38,7 @@ def downloadFolder(folderName, start_url, base="D:/TujiDownload/"):
     folderExists = os.path.exists(folderName)
     if not folderExists:  # 判断是否存在文件夹如果不存在则创建为文件夹
         os.makedirs(folderName)  # makedirs 创建文件时如果路径不存在会创建这个路径
-        print("****Start****", folderName, " downloading","****Start****")
+        print("****Start****", folderName, " downloading", "****Start****")
     else:
         print("****Pass****", folderName, "has been downloaded befor", "****Pass****")
         return 0
@@ -52,10 +52,9 @@ def downloadFolder(folderName, start_url, base="D:/TujiDownload/"):
     time.sleep(1)
 
 
-def downloadPage(name, tuji_url, newCookie='', page=1, ):
+def downloadPage(name, tuji_url, newCookie='', page=1, base="D:/TujiDownload/"):
     # 本函数旨在下载一个类目下的全部图片，并归档 搜索功能需要提供cookie，但无需开通会员
     # 例如：https://tujidao06.com/t/?id=1817 指向铃木爱理全部图集
-    #
     headers = {
         # 假装自己是浏览器
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.50',
@@ -90,7 +89,7 @@ def downloadPage(name, tuji_url, newCookie='', page=1, ):
         except IndexError:
             print("--------------IndexError in matchesPicUrl--------------")
             break
-        downloadFolder(name + "/" + matchesTitle[i], matchesPicUrl[i + matchMagicNumber])
+        downloadFolder(name + "/" + matchesTitle[i], matchesPicUrl[i + matchMagicNumber],base=base)
     if successTarget > 0:
         print("-------page ", page, "find target=", successTarget, "-------")
-        downloadPage(name, tuji_url, newCookie=newCookie, page=page + 1)
+        downloadPage(name, tuji_url, newCookie=newCookie, page=page + 1, base=base)
