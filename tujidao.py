@@ -9,7 +9,23 @@ def downloadSigle(file_path, pic_url, refererUrl="https://tujidao06.com/"):
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36 ",
         "Referer": refererUrl}
-    r = requests.get(pic_url, headers=headers)
+    MaxRetryTime = 0
+
+    while MaxRetryTime < 24:
+        try:
+            r = requests.get(pic_url, headers=headers)
+            break
+        except requests.exceptions.ConnectionError:
+            print("****Warning**** 下载过快", MaxRetryTime, " 秒后重试 ****Warning****")
+            MaxRetryTime = MaxRetryTime + 1
+            time.sleep(MaxRetryTime * 5)
+
+    if MaxRetryTime == 24:
+        print("****Error**** 下载过快 多次重试 故障未解除 ****Error****")
+        print("****Error**** 下载过快 多次重试 故障未解除 ****Error****")
+        print("****Error**** 下载过快 多次重试 故障未解除 ****Error****")
+        time.sleep(1440)
+        return 404
 
     if r.status_code != 404:
         with open(file_path, 'wb') as f:
@@ -89,7 +105,7 @@ def downloadPage(name, tuji_url, newCookie='', page=1, base="D:/TujiDownload/"):
         except IndexError:
             print("--------------IndexError in matchesPicUrl--------------")
             break
-        downloadFolder(name + "/" + matchesTitle[i], matchesPicUrl[i + matchMagicNumber],base=base)
+        downloadFolder(name + "/" + matchesTitle[i], matchesPicUrl[i + matchMagicNumber], base=base)
     if successTarget > 0:
         print("-------page ", page, "find target=", successTarget, "-------")
         downloadPage(name, tuji_url, newCookie=newCookie, page=page + 1, base=base)
