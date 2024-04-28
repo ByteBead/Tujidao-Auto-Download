@@ -28,12 +28,12 @@ Cookie需要自行填写，无需购买付费VIP，免费账号即可。
 
 还是以铃木爱理图集为例。铃木爱理图集【 https://www.tujidao06.com/t/?id=1817 】如图。 
 
-<img src="https://pic.itrefer.com/2023/05/24_%E6%88%AA%E5%B1%8F2023-05-24%2013.25.11.png" alt="图集岛 铃木爱理" style="zoom:67%;" />
+<img src="https://picy.itrefer.com/2023/05/24_%E6%88%AA%E5%B1%8F2023-05-24%2013.25.11.png" alt="图集岛 铃木爱理" style="zoom:67%;" />
 
 如果需要下载第一个图集 *[Young Gangan] 2017年No.07* ，那么复制该封面图片的地址填入`start_url`。 
 对于本案例应为【 https://tjgew6d4ew.82pic.com/a/1/30817/0.jpg 】。
 
-<img src="https://pic.itrefer.com/2023/05/24_0-20230524133055544.jpg" alt="封面图像地址" style="zoom:100%;" />
+<img src="https://picy.itrefer.com/2023/05/24_0-20230524133055544.jpg" alt="封面图像地址" style="zoom:100%;" />
 
 ## 单个图片下载
 `downloadSigle(file_path, pic_url, refererUrl="https://tujidao06.com/")`
